@@ -3,9 +3,12 @@ from flask import Flask, json, request, jsonify
 import os
 import urllib.request
 from werkzeug.utils import secure_filename
+from flask_cors import CORS
+from pathlib import Path
  
 app = Flask(__name__)
- 
+CORS(app)
+
 app.secret_key = "caircocoders-ednalan"
  
 UPLOAD_FOLDER = 'static/uploads'
@@ -54,13 +57,18 @@ def upload_file():
         resp = jsonify(errors)
         resp.status_
 
-@app.route('/uploadReturn', methods=['GET'])
-def uploadReturn_file():
-    args = request.args
-    returnFilename = args.get('fname')
-    resp = jsonify({'filename' : + returnFilename})
-    resp.status_code = 201
-    return resp
 
+@app.route('/uploadReturn/<filename>', methods=['GET'])
+def uploadReturn_file(filename):
+    my_file = Path(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+    if my_file.exists():
+        resp = jsonify({'message' : 'File Exists : '+ filename  }  )
+        resp.status_code = 200
+        return jsonify({'response_code' : resp.status_code ,'path' : os.path.join(app.config['UPLOAD_FOLDER'], filename)}) 
+    else: 
+        resp = jsonify({'message' : 'File do not exist : '+ filename  }  )
+        resp.status_code = 400
+        return jsonify({'response_code' : resp.status_code ,'message' : 'File does not exists' }) 
+           
 if __name__ == '__main__':
     app.run(debug=True)
