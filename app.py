@@ -28,7 +28,7 @@ def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 def image_conversion(img):
-    pytesseract.pytesseract.tesseract_cmd = r'C:\Users\subash.mahat\AppData\Local\Tesseract-OCR\tesseract.exe'
+    #pytesseract.pytesseract.tesseract_cmd = r'C:\Users\subash.mahat\AppData\Local\Tesseract-OCR\tesseract.exe'
     img_file = img
     file_name = img_file.split('/')[2]
     img = cv2.imread(img_file)
