@@ -60,4 +60,4 @@ jobs:
         with:
           app-name: 'securePHI'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_CD1C42DF01634B72B8269F122E37262D }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_4351D6EFACD249918EDE3457DFDFF0D5 }}
